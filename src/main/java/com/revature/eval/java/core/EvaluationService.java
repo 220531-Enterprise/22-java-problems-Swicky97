@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +23,10 @@ public class EvaluationService {
 
 		public static long toMilesPerHour(double kilometersPerHour) {
 			// TODO Write an implementation for this method declaration
-			// test
-			return 0;
+			if(kilometersPerHour < 0) {
+				return -1;
+			}
+			return Math.round(kilometersPerHour / 1.609);
 		}
 
 		/**
@@ -43,7 +46,11 @@ public class EvaluationService {
 		 */
 		public static String printConversion(double kilometersPerHour) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			if(kilometersPerHour < 0) {
+				return "Invalid Value";
+			}
+			long conversion = Math.round(kilometersPerHour / 1.609);
+			return kilometersPerHour + " km/h = " + conversion + " mi/h";
 		}
 	}
 
@@ -69,7 +76,16 @@ public class EvaluationService {
 	 */
 	public String printMegaBytesAndKiloBytes(int XX) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		if(XX < 0) {
+			System.out.println("Invalid Value");
+		}
+		int YY = 0;
+		int kilobytes = XX;
+		while(kilobytes >= 1024) {
+			kilobytes -= 1024;
+			YY++;
+		}
+		return XX + " KB = " + YY + " MB and " + kilobytes + " KB";
 	}
 
 	/**
@@ -93,7 +109,15 @@ public class EvaluationService {
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		if(hourOfDay < 0 || hourOfDay > 23) {
+			return false;
+		}
+		if((hourOfDay < 8 || hourOfDay > 22 ) && isBarking) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -109,7 +133,15 @@ public class EvaluationService {
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		DecimalFormat df = new DecimalFormat("#.###");
+		String formatFirst = df.format(firstNum);
+		String formatSecond = df.format(secondNum);
+		if(formatFirst.equals(formatSecond)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -126,7 +158,12 @@ public class EvaluationService {
 
 		public static boolean hasTeen(int x, int y, int z) {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if(isTeen(x) || isTeen(y) || isTeen(z)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 
 		// We can initialize isTeen method first
@@ -134,7 +171,12 @@ public class EvaluationService {
 
 		public static boolean isTeen(int number) {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if(number >= 13 && number <= 19) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 	}
 
@@ -155,7 +197,21 @@ public class EvaluationService {
 	 */
 	public String printYearsAndDays(long minutes) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		if(minutes < 0) {
+			System.out.println("Invalid Value");
+		}
+		long years = 0;
+		long days = 0;
+		long tempMin = minutes;
+		while(tempMin >= 525600) {
+			tempMin -= 525600;
+			years++;
+		}
+		while(tempMin >= 1440) {
+			tempMin -= 1440;
+			days++;
+		}
+		return minutes + " min = " + years + " y and " + days + " d";
 	}
 
 	/**
@@ -169,7 +225,19 @@ public class EvaluationService {
 	 */
 	public String printNumberInWord(int number) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		switch(number) {
+			case 0: return "ZERO";
+			case 1: return "ONE";
+			case 2: return "TWO";
+			case 3: return "THREE";
+			case 4: return "FOUR";
+			case 5: return "FIVE";
+			case 6: return "SIX";
+			case 7: return "SEVEN";
+			case 8: return "EIGHT";
+			case 9: return "NINE";
+			default: return "OTHER";
+		}
 	}
 
 	/**
@@ -193,7 +261,16 @@ public class EvaluationService {
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		if(first < 10 || second < 10) {
+			return -1;
+		}
+		int gcd = 1;
+		for(int i = 1; i <= first && i <= second; i++) {
+			if(first % i == 0 && second % i == 0) {
+				gcd = i;
+			}
+		}
+		return gcd;
 	}
 
 	/**
